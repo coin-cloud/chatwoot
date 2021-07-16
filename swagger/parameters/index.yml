@@ -1,6 +1,9 @@
 account_id:
   $ref: ./account_id.yml
 
+agent_bot_id:
+  $ref: ./agent_bot_id.yml
+
 team_id:
   $ref: ./team_id.yml
 
@@ -21,3 +24,15 @@ contact_sort_param:
 
 page:
   $ref: ./page.yml
+
+platform_user_id:
+  $ref: ./platform_user_id.yml
+
+custom_filter_id:
+  $ref: ./custom_filter_id.yml
+
+public_inbox_identifier:
+  $ref: ./public/inbox_identifier.yml
+
+public_contact_identifier:
+  $ref: ./public/contact_identifier.yml

@@ -48,15 +48,11 @@ class ConversationFinder
   private
 
   def set_inboxes
-    if params[:inbox_id]
-      @inbox_ids = current_account.inboxes.where(id: params[:inbox_id])
-    else
-      if @current_user.administrator?
-        @inbox_ids = current_account.inboxes.pluck(:id)
-      elsif @current_user.agent?
-        @inbox_ids = @current_user.assigned_inboxes.pluck(:id)
-      end
-    end
+    @inbox_ids = if params[:inbox_id]
+                   current_account.inboxes.where(id: params[:inbox_id])
+                 else
+                   @current_user.assigned_inboxes.pluck(:id)
+                 end
   end
 
   def set_assignee_type
@@ -77,6 +73,8 @@ class ConversationFinder
       @conversations = @conversations.assigned_to(current_user)
     when 'unassigned'
       @conversations = @conversations.unassigned
+    when 'assigned'
+      @conversations = @conversations.where.not(assignee_id: nil)
     end
     @conversations
   end
